@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Comunicación Asertiva · ADSO · SENA 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --neon:#a855f7;--neon2:#7c3aed;--neon3:#c084fc;
+  --bg:#060410;--bg2:#0d0820;
+  --card:rgba(255,255,255,0.04);--cb:rgba(168,85,247,0.22);
+  --text:#f1f0ff;--muted:#9c8fb5;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+@keyframes pulseOrb{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.6}50%{transform:translate(-50%,-50%) scale(1.12);opacity:.9}}
+@keyframes floatUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes blinkDot{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.10s}.d2{transition-delay:.20s}.d3{transition-delay:.30s}
+.d4{transition-delay:.40s}.d5{transition-delay:.50s}
+
+/* NAV */
+nav.topnav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;
+  background:rgba(6,4,16,.6);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(168,85,247,.15);transition:background .3s;
+}
+nav.topnav.scrolled{background:rgba(6,4,16,.94)}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:.05em;color:var(--neon3)}
+.nav-logo span{color:var(--text);opacity:.45}
+.nav-links{display:flex;gap:1.6rem;flex-wrap:wrap}
+.nav-links a{font-size:.82rem;letter-spacing:.03em;color:var(--muted);transition:color .2s;text-decoration:none;cursor:pointer;}
+.nav-links a:hover,.nav-links a.active{color:var(--neon3)}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;padding:7rem 1.5rem 4rem;overflow:hidden;text-align:center;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 55% at 50% -5%,rgba(124,58,237,.4) 0%,transparent 70%),radial-gradient(ellipse 50% 35% at 80% 80%,rgba(168,85,247,.1) 0%,transparent 60%),linear-gradient(180deg,#060410 0%,#0d0820 100%);}
+.hero-orb{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.15) 0%,transparent 70%);top:50%;left:50%;animation:pulseOrb 7s ease-in-out infinite;pointer-events:none;}
+.hero-content{position:relative;z-index:2;max-width:860px;animation:fadeUp .9s ease both}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);border-radius:100px;padding:5px 18px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--neon3);margin-bottom:1.8rem;}
+.dot{width:6px;height:6px;background:var(--neon);border-radius:50%;animation:blinkDot 2s infinite;display:inline-block;flex-shrink:0}
+.hero-title{font-family:'Syne',sans-serif;font-size:clamp(2.1rem,5.5vw,3.9rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:1.3rem;}
+.hero-title .accent{background:linear-gradient(135deg,#c084fc,#7c3aed,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:1.05rem;color:var(--muted);max-width:560px;margin:0 auto 2.5rem;line-height:1.85}
+.btn-hero{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;border:none;padding:13px 32px;border-radius:100px;font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;cursor:pointer;box-shadow:0 0 32px rgba(168,85,247,.38);transition:all .3s;text-decoration:none;}
+.btn-hero:hover{transform:translateY(-3px);box-shadow:0 0 55px rgba(168,85,247,.65)}
+.hero-svg-wrap{margin-top:3.5rem;display:flex;justify-content:center;animation:floatUp 5.5s ease-in-out infinite}
+.hero-svg{width:min(480px,90vw)}
+.hero-stats{display:flex;justify-content:center;gap:3rem;margin-top:3rem;flex-wrap:wrap}
+.hero-stat .num{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;color:var(--neon3)}
+.hero-stat .lab{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+
+/* SHARED */
+section{padding:6rem 1.5rem;position:relative;z-index:1}
+.container{max-width:1160px;margin:0 auto}
+.section-tag{display:inline-block;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--neon3);opacity:.85;margin-bottom:.45rem}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(1.7rem,3.5vw,2.55rem);font-weight:800;line-height:1.2;margin-bottom:.8rem}
+.section-line{width:48px;height:3px;background:linear-gradient(90deg,var(--neon),transparent);border-radius:4px;margin-bottom:2.5rem}
+.section-line.center{margin-left:auto;margin-right:auto}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(168,85,247,.22),transparent);position:relative;z-index:1}
+
+/* INTRO */
+#intro{background:linear-gradient(180deg,#0d0820 0%,#060410 100%)}
+.intro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
+.intro-card{background:var(--card);border:1px solid var(--cb);border-radius:24px;padding:2.2rem;position:relative;overflow:hidden;}
+.intro-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(168,85,247,.09) 0%,transparent 70%);pointer-events:none;}
+.intro-icon-row{display:flex;gap:10px;margin-bottom:1.3rem}
+.iicon{width:44px;height:44px;background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.24);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.intro-text{font-size:.92rem;line-height:1.9;color:var(--muted)}
+.intro-text strong{color:var(--text)}
+.intro-points{display:flex;flex-direction:column;gap:1rem}
+.ipoint{display:flex;align-items:flex-start;gap:1rem;padding:1.1rem;background:var(--card);border:1px solid var(--cb);border-radius:16px;transition:all .3s;cursor:default;}
+.ipoint:hover{background:rgba(168,85,247,.07);border-color:rgba(168,85,247,.42);transform:translateX(6px)}
+.ipoint-icon{width:38px;height:38px;min-width:38px;background:rgba(168,85,247,.13);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;}
+.ipoint-text h4{font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700;margin-bottom:2px}
+.ipoint-text p{font-size:.8rem;color:var(--muted);line-height:1.6}
+
+/* TEMAS */
+#temas{background:var(--bg)}
+.temas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:1.4rem}
+.tema-card{background:var(--card);border:1px solid var(--cb);border-radius:20px;padding:1.8rem;position:relative;overflow:hidden;transition:all .4s;cursor:default;}
+.tema-card:hover{background:rgba(168,85,247,.07);border-color:rgba(168,85,247,.48);transform:translateY(-7px);box-shadow:0 20px 55px rgba(124,58,237,.2);}
+.tema-num{position:absolute;top:12px;right:16px;font-family:'Syne',sans-serif;font-size:3.2rem;font-weight:800;color:rgba(168,85,247,.07);line-height:1;user-select:none;}
+.tema-icon{width:50px;height:50px;background:linear-gradient(135deg,rgba(124,58,237,.28),rgba(168,85,247,.1));border:1px solid rgba(168,85,247,.26);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1rem;}
+.tema-card h3{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.5rem}
+.tema-card p{font-size:.82rem;color:var(--muted);line-height:1.75}
+.tema-tag{display:inline-block;margin-top:.9rem;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--neon3);background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.2);border-radius:100px;padding:3px 10px;}
+
+/* REFLEXIÓN */
+#reflexion{background:linear-gradient(180deg,#060410 0%,#0d0820 100%)}
+.quote-card{max-width:860px;margin:0 auto;background:linear-gradient(135deg,rgba(124,58,237,.13) 0%,rgba(168,85,247,.04) 100%);border:1px solid rgba(168,85,247,.32);border-radius:28px;padding:clamp(2rem,5vw,3.5rem);position:relative;overflow:hidden;}
+.quote-card::before{content:'"';position:absolute;top:-1rem;left:1.8rem;font-family:'Syne',sans-serif;font-size:11rem;color:rgba(168,85,247,.07);font-weight:800;line-height:1;user-select:none;pointer-events:none;}
+.quote-card::after{content:'';position:absolute;bottom:-80px;right:-80px;width:280px;height:280px;background:radial-gradient(circle,rgba(168,85,247,.08) 0%,transparent 70%);pointer-events:none;}
+.quote-label{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--neon3);margin-bottom:1.5rem;display:flex;align-items:center;gap:8px;}
+.quote-label::before{content:'';width:24px;height:2px;background:var(--neon3);display:inline-block}
+.quote-text{font-family:'Syne',sans-serif;font-size:clamp(1rem,2.4vw,1.28rem);font-weight:600;line-height:1.85;color:var(--text);position:relative;z-index:1;}
+.quote-text em{color:var(--neon3);font-style:normal}
+.quote-footer{margin-top:2rem;display:flex;align-items:center;gap:1rem;position:relative;z-index:1}
+.quote-dot{width:42px;height:42px;background:linear-gradient(135deg,#7c3aed,#a855f7);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+.quote-source strong{font-family:'Syne',sans-serif;font-size:.85rem}
+.quote-source span{display:block;font-size:.76rem;color:var(--muted)}
+
+/* TIPOS */
+#tipos{background:var(--bg)}
+.tipos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem}
+.tipo-card{background:var(--card);border:1px solid var(--cb);border-radius:20px;padding:1.8rem;transition:all .3s;cursor:default;position:relative;overflow:hidden;}
+.tipo-card:hover{border-color:rgba(168,85,247,.48);transform:translateY(-5px);box-shadow:0 14px 40px rgba(124,58,237,.18)}
+.tipo-icon{font-size:2rem;margin-bottom:1rem;display:block}
+.tipo-card h3{font-family:'Syne',sans-serif;font-size:.92rem;font-weight:700;margin-bottom:.5rem}
+.tipo-card p{font-size:.82rem;color:var(--muted);line-height:1.75}
+.tipo-owner{display:inline-flex;align-items:center;gap:6px;margin-top:1rem;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--neon3);background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.2);border-radius:100px;padding:3px 10px;}
+.tipo-owner i{font-size:.7rem}
+
+/* ── EVIDENCIAS ── */
+#evidencias{background:linear-gradient(180deg,#0d0820 0%,#060410 100%)}
+
+/* Integrante header dentro de evidencias */
+.ev-member-block{margin-bottom:3.5rem}
+.ev-member-header{
+  display:flex;align-items:center;gap:1.2rem;margin-bottom:1.8rem;
+  padding-bottom:1.2rem;border-bottom:1px solid rgba(168,85,247,.15);
+}
+.ev-member-avatar{
+  width:54px;height:54px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:#fff;
+  box-shadow:0 0 22px rgba(168,85,247,.3);
+}
+.ev-member-info h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800}
+.ev-member-info p{font-size:.78rem;color:var(--neon3);letter-spacing:.06em;text-transform:uppercase}
+.ev-member-topic{
+  display:inline-flex;align-items:center;gap:6px;margin-top:.35rem;
+  font-size:.7rem;color:var(--muted);background:rgba(168,85,247,.06);
+  border:1px solid rgba(168,85,247,.14);border-radius:100px;padding:2px 10px;
+}
+
+/* Grid de evidencias */
+.ev-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
+.ev-card{background:var(--card);border:1px solid var(--cb);border-radius:18px;overflow:hidden;transition:all .3s;}
+.ev-card:hover{transform:translateY(-5px);border-color:rgba(168,85,247,.44);box-shadow:0 14px 40px rgba(124,58,237,.18)}
+.ev-thumb{
+  height:110px;background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(168,85,247,.07));
+  display:flex;align-items:center;justify-content:center;position:relative;
+}
+.ev-thumb::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 60% 40%,rgba(168,85,247,.16),transparent 70%);}
+.ev-thumb i{position:relative;z-index:1;color:rgba(168,85,247,.5);font-size:2.5rem}
+.ev-body{padding:1.1rem}
+.ev-body h4{font-family:'Syne',sans-serif;font-size:.86rem;font-weight:700;margin-bottom:.35rem}
+.ev-body p{font-size:.77rem;color:var(--muted);line-height:1.6;margin-bottom:.9rem}
+
+/* Link slot */
+.ev-link-slot{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(168,85,247,.06);border:1px dashed rgba(168,85,247,.3);
+  border-radius:10px;padding:7px 10px;
+  font-size:.76rem;color:var(--muted);cursor:pointer;
+  transition:all .25s;position:relative;
+}
+.ev-link-slot:hover{background:rgba(168,85,247,.12);border-color:rgba(168,85,247,.55);color:var(--neon3)}
+.ev-link-slot i{font-size:.8rem;color:var(--neon);flex-shrink:0}
+.ev-link-slot input{
+  background:transparent;border:none;outline:none;width:100%;
+  color:var(--text);font-size:.76rem;font-family:'DM Sans',sans-serif;
+  cursor:text;
+}
+.ev-link-slot input::placeholder{color:var(--muted)}
+.ev-link-btn{
+  display:none;align-items:center;gap:5px;margin-top:6px;
+  background:linear-gradient(135deg,#7c3aed,#a855f7);
+  color:#fff;text-decoration:none;border-radius:8px;
+  padding:6px 12px;font-size:.74rem;font-weight:600;
+  font-family:'Syne',sans-serif;transition:all .25s;
+}
+.ev-link-btn:hover{box-shadow:0 0 18px rgba(168,85,247,.5);transform:translateY(-1px)}
+.ev-link-btn.visible{display:inline-flex}
+.ev-chip{display:inline-block;margin-top:.6rem;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:100px;background:rgba(168,85,247,.1);color:var(--neon3);border:1px solid rgba(168,85,247,.2);}
+
+/* INTEGRANTES */
+#integrantes{background:var(--bg)}
+.int-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.8rem}
+.int-card{background:var(--card);border:1px solid var(--cb);border-radius:24px;padding:2rem;text-align:center;position:relative;overflow:hidden;transition:all .4s;cursor:default;}
+.int-card::before{content:'';position:absolute;top:0;left:0;right:0;height:110px;background:linear-gradient(180deg,rgba(124,58,237,.15) 0%,transparent 100%);pointer-events:none;}
+.int-card:hover{transform:translateY(-8px);border-color:rgba(168,85,247,.48);box-shadow:0 22px 55px rgba(124,58,237,.2)}
+.int-avatar{width:82px;height:82px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:#fff;margin:0 auto 1rem;position:relative;z-index:1;box-shadow:0 0 28px rgba(168,85,247,.35);}
+.int-avatar-img{width:82px;height:82px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 1rem;position:relative;z-index:1;box-shadow:0 0 28px rgba(168,85,247,.35);}
+.int-name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:3px}
+.int-role{font-size:.74rem;color:var(--neon3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem}
+.int-topic{font-size:.8rem;color:var(--muted);margin-bottom:.7rem;font-style:italic}
+.int-desc{font-size:.81rem;color:var(--muted);line-height:1.75;margin-bottom:1.1rem}
+.int-skills{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.skill-chip{font-size:.68rem;padding:3px 10px;background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.2);border-radius:100px;color:var(--neon3);}
+
+/* REFLEXIONES */
+#reflexiones{background:linear-gradient(180deg,#060410 0%,#0d0820 100%)}
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.4rem}
+.ref-card{background:var(--card);border:1px solid var(--cb);border-radius:20px;padding:1.9rem;position:relative;overflow:hidden;transition:all .3s;cursor:default;}
+.ref-card:hover{border-color:rgba(168,85,247,.44);box-shadow:0 12px 40px rgba(124,58,237,.15)}
+.ref-card::after{content:'"';position:absolute;bottom:-1.5rem;right:1.5rem;font-family:'Syne',sans-serif;font-size:7rem;color:rgba(168,85,247,.06);font-weight:800;line-height:1;user-select:none;pointer-events:none;}
+.ref-bar{height:2px;background:linear-gradient(90deg,var(--neon),transparent);border-radius:2px;margin-bottom:1.2rem}
+.ref-header{display:flex;align-items:center;gap:.9rem;margin-bottom:1.1rem}
+.ref-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:.92rem;font-weight:800;color:#fff;flex-shrink:0;}
+.ref-who h4{font-family:'Syne',sans-serif;font-size:.86rem;font-weight:700}
+.ref-who p{font-size:.72rem;color:var(--muted)}
+.ref-text{font-size:.85rem;color:var(--muted);line-height:1.85;position:relative;z-index:1}
+
+/* FOOTER */
+footer.main-footer{background:#0d0820;border-top:1px solid rgba(168,85,247,.14);padding:4rem 1.5rem 2.5rem;position:relative;overflow:hidden;z-index:1;}
+footer.main-footer::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:1px;background:linear-gradient(90deg,transparent,rgba(168,85,247,.5),transparent);}
+.footer-top{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:3rem;margin-bottom:3rem}
+.footer-brand-name{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:800;color:var(--neon3);margin-bottom:.5rem}
+.footer-brand p{font-size:.82rem;color:var(--muted);line-height:1.75;max-width:300px;margin-bottom:1.2rem}
+.sena-badge{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;color:var(--muted);background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.14);border-radius:100px;padding:4px 12px;}
+.footer-col h5{font-family:'Syne',sans-serif;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text);margin-bottom:1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-col ul li a{font-size:.82rem;color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-col ul li a:hover{color:var(--neon3)}
+.footer-bottom{border-top:1px solid rgba(168,85,247,.1);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-copy{font-size:.76rem;color:var(--muted)}
+.footer-copy strong{color:var(--text)}
+.social-row{display:flex;gap:10px}
+.soc-btn{width:35px;height:35px;background:rgba(168,85,247,.07);border:1px solid rgba(168,85,247,.18);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.9rem;cursor:pointer;transition:all .3s;text-decoration:none;}
+.soc-btn:hover{background:rgba(168,85,247,.2);border-color:rgba(168,85,247,.48);color:var(--neon3);transform:translateY(-2px)}
+
+/* Instrucción admin */
+.admin-note{
+  background:rgba(168,85,247,.05);border:1px dashed rgba(168,85,247,.28);
+  border-radius:14px;padding:1.1rem 1.4rem;margin-bottom:2.5rem;
+  font-size:.82rem;color:var(--muted);line-height:1.7;display:flex;gap:.8rem;align-items:flex-start;
+}
+.admin-note i{color:var(--neon3);margin-top:2px;flex-shrink:0}
+.admin-note strong{color:var(--neon3)}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hero-stats{gap:1.5rem}
+  .footer-bottom{flex-direction:column;text-align:center}
+  nav.topnav{padding:1rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="topnav" id="topnav">
+  <div class="nav-logo">ADSO<span> · SENA</span></div>
+  <div class="nav-links">
+    <a href="#intro">Introducción</a>
+    <a href="#temas">Temas</a>
+    <a href="#reflexion">Reflexión</a>
+    <a href="#tipos">Tipos de Com.</a>
+    <a href="#evidencias">Evidencias</a>
+    <a href="#integrantes">Equipo</a>
+    <a href="#reflexiones">Reflexión Final</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="dot"></span>
+      <i class="fa-solid fa-microchip" style="font-size:.8rem"></i>
+      Análisis y Desarrollo de Software · 2026
+    </div>
+    <h1 class="hero-title">
+      Comunicación <span class="accent">Asertiva</span><br/>
+      en el Desarrollo<br/>de Software
+    </h1>
+    <p class="hero-sub">
+      La comunicación efectiva fortalece el trabajo en equipo, mejora la resolución de problemas y garantiza proyectos exitosos.
+    </p>
+    <a href="#intro" class="btn-hero">
+      <i class="fa-solid fa-arrow-down-long"></i> Explorar Proyecto
+    </a>
+    <div class="hero-svg-wrap">
+      <svg class="hero-svg" viewBox="0 0 520 290" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="260" cy="145" rx="195" ry="115" fill="rgba(124,58,237,0.07)"/>
+        <rect x="138" y="55" width="244" height="152" rx="13" fill="rgba(168,85,247,0.07)" stroke="rgba(168,85,247,0.4)" stroke-width="1.5"/>
+        <rect x="150" y="67" width="220" height="128" rx="7" fill="rgba(124,58,237,0.11)"/>
+        <rect x="168" y="88" width="82" height="5" rx="3" fill="rgba(168,85,247,0.65)"/>
+        <rect x="168" y="103" width="122" height="5" rx="3" fill="rgba(168,85,247,0.30)"/>
+        <rect x="168" y="117" width="56" height="5" rx="3" fill="rgba(192,132,252,0.55)"/>
+        <rect x="168" y="131" width="104" height="5" rx="3" fill="rgba(168,85,247,0.28)"/>
+        <rect x="168" y="145" width="142" height="5" rx="3" fill="rgba(168,85,247,0.38)"/>
+        <rect x="168" y="159" width="90" height="5" rx="3" fill="rgba(192,132,252,0.45)"/>
+        <rect x="168" y="173" width="52" height="5" rx="3" fill="rgba(168,85,247,0.62)"/>
+        <rect x="246" y="207" width="28" height="18" rx="3" fill="rgba(168,85,247,0.22)"/>
+        <rect x="228" y="225" width="64" height="6" rx="3" fill="rgba(168,85,247,0.18)"/>
+        <circle cx="88" cy="136" r="23" fill="rgba(124,58,237,0.18)" stroke="rgba(168,85,247,0.45)" stroke-width="1.5"/>
+        <circle cx="88" cy="130" r="9" fill="rgba(168,85,247,0.6)"/>
+        <path d="M72 155 Q88 145 104 155" stroke="rgba(168,85,247,0.5)" stroke-width="2" fill="none"/>
+        <rect x="103" y="106" width="36" height="19" rx="10" fill="rgba(168,85,247,0.22)" stroke="rgba(168,85,247,0.4)" stroke-width="1"/>
+        <rect x="108" y="113" width="20" height="4" rx="2" fill="rgba(168,85,247,0.7)"/>
+        <rect x="108" y="120" width="13" height="3" rx="2" fill="rgba(168,85,247,0.4)"/>
+        <circle cx="432" cy="136" r="23" fill="rgba(124,58,237,0.18)" stroke="rgba(168,85,247,0.45)" stroke-width="1.5"/>
+        <circle cx="432" cy="130" r="9" fill="rgba(192,132,252,0.6)"/>
+        <path d="M416 155 Q432 145 448 155" stroke="rgba(168,85,247,0.5)" stroke-width="2" fill="none"/>
+        <rect x="381" y="106" width="36" height="19" rx="10" fill="rgba(192,132,252,0.18)" stroke="rgba(192,132,252,0.4)" stroke-width="1"/>
+        <rect x="386" y="113" width="20" height="4" rx="2" fill="rgba(192,132,252,0.7)"/>
+        <rect x="386" y="120" width="14" height="3" rx="2" fill="rgba(192,132,252,0.4)"/>
+        <line x1="138" y1="136" x2="112" y2="136" stroke="rgba(168,85,247,0.22)" stroke-width="1" stroke-dasharray="4 3"/>
+        <line x1="382" y1="136" x2="408" y2="136" stroke="rgba(168,85,247,0.22)" stroke-width="1" stroke-dasharray="4 3"/>
+        <circle cx="260" cy="256" r="6" fill="rgba(168,85,247,0.7)"/>
+        <circle cx="230" cy="246" r="4" fill="rgba(168,85,247,0.4)"/>
+        <circle cx="290" cy="246" r="4" fill="rgba(168,85,247,0.4)"/>
+        <line x1="260" y1="256" x2="230" y2="246" stroke="rgba(168,85,247,0.3)" stroke-width="1"/>
+        <line x1="260" y1="256" x2="290" y2="246" stroke="rgba(168,85,247,0.3)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">7</div><div class="lab">Temas Clave</div></div>
+      <div class="hero-stat"><div class="num">3</div><div class="lab">Integrantes</div></div>
+      <div class="hero-stat"><div class="num">2026</div><div class="lab">SENA · ADSO</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INTRO -->
+<section id="intro">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">01 · Introducción</span>
+      <h2 class="section-title">¿Qué es la Comunicación<br/>y por qué importa?</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="intro-grid">
+      <div class="reveal d1">
+        <div class="intro-card">
+          <div class="intro-icon-row">
+            <div class="iicon">💬</div>
+            <div class="iicon">&lt;/&gt;</div>
+            <div class="iicon">👥</div>
+          </div>
+          <p class="intro-text">
+            La comunicación es el proceso mediante el cual las personas transmiten
+            <strong>ideas, emociones e información</strong>. En el área de Análisis y Desarrollo de Software,
+            la comunicación asertiva es fundamental para <strong>trabajar en equipo</strong>, comprender
+            requisitos y desarrollar proyectos exitosos.<br/><br/>
+            Un tecnólogo que comunica de forma clara y respetuosa logra coordinar equipos, gestionar
+            expectativas y entregar software de <strong>alta calidad</strong>, evitando errores costosos y retrabajo.
+          </p>
+        </div>
+      </div>
+      <div class="intro-points">
+        <div class="reveal d2">
+          <div class="ipoint">
+            <div class="ipoint-icon">🎯</div>
+            <div class="ipoint-text"><h4>Claridad en Requisitos</h4><p>Evita malentendidos y retrabajo desde el inicio del proyecto.</p></div>
+          </div>
+        </div>
+        <div class="reveal d3">
+          <div class="ipoint">
+            <div class="ipoint-icon">🤝</div>
+            <div class="ipoint-text"><h4>Colaboración Efectiva</h4><p>Genera un ambiente donde todos aportan libremente sus ideas.</p></div>
+          </div>
+        </div>
+        <div class="reveal d4">
+          <div class="ipoint">
+            <div class="ipoint-icon">🛡️</div>
+            <div class="ipoint-text"><h4>Resolución de Conflictos</h4><p>Transforma diferencias en soluciones mutuamente beneficiosas.</p></div>
+          </div>
+        </div>
+        <div class="reveal d5">
+          <div class="ipoint">
+            <div class="ipoint-icon">📈</div>
+            <div class="ipoint-text"><h4>Mejora Continua</h4><p>El feedback constructivo impulsa el crecimiento del equipo.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TEMAS -->
+<section id="temas">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:3.5rem">
+      <span class="section-tag">02 · Formación</span>
+      <h2 class="section-title">Temáticas Vistas<br/>en la Competencia</h2>
+      <div class="section-line center"></div>
+    </div>
+    <div class="temas-grid">
+      <div class="reveal"><div class="tema-card">
+        <div class="tema-num">01</div><div class="tema-icon">💬</div>
+        <h3>Comunicación Asertiva</h3>
+        <p>Expresar ideas, opiniones y necesidades de forma clara, honesta y respetuosa, sin agresividad ni pasividad.</p>
+        <span class="tema-tag">Core Skill</span>
+      </div></div>
+      <div class="reveal"><div class="tema-card">
+        <div class="tema-num">02</div><div class="tema-icon">🔀</div>
+        <h3>Tipos de Comunicación</h3>
+        <p>Verbal, no verbal, escrita, digital. Cada canal tiene su propia dinámica e impacto en el entorno profesional.</p>
+        <span class="tema-tag">Fundamento</span>
+      </div></div>
+      <div class="reveal"><div class="tema-card">
+        <div class="tema-num">03</div><div class="tema-icon">👥</div>
+        <h3>Trabajo en Equipo</h3>
+        <p>Sinergia y colaboración entre miembros con roles definidos para lograr objetivos comunes de manera eficiente.</p>
+        <span class="tema-tag">Colaboración</span>
+      </div></div>
+      <div class="reveal"><div class="tema-card">
+        <div class="tema-num">04</div><div class="tema-icon">⚖️</div>
+        <h3>Resolución de Conflictos</h3>
+        <p>Estrategias para gestionar y transformar desacuerdos en oportunidades de mejora dentro del equipo.</p>
+        <span class="tema-tag">Gestión</span>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- REFLEXIÓN DEL RETO -->
+<section id="reflexion">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:2.5rem">
+      <span class="section-tag">03 · Reflexión del Reto</span>
+      <h2 class="section-title">Tipos de Comunicación</h2>
+      <div class="section-line center"></div>
+    </div>
+    <div class="reveal d1">
+      <div class="quote-card">
+        <div class="quote-label">Reflexión del Equipo</div>
+        <p class="quote-text">
+          Aprendimos que la comunicación <em>verbal y no verbal</em> influyen directamente en la
+          convivencia, el trabajo colaborativo y el entendimiento entre las personas. Expresarnos
+          correctamente mejora la <em>resolución de problemas</em> y fortalece las relaciones
+          personales y profesionales.<br/><br/>
+          En el desarrollo de software, cada gesto, tono y palabra comunican algo. Reconocer esto
+          nos hace <em>mejores tecnólogos y mejores personas</em>.
+        </p>
+        <div class="quote-footer">
+          <div class="quote-dot">💡</div>
+          <div class="quote-source">
+            <strong>ADSO · Ficha 3256502</strong>
+            <span>SENA · Competencia de Comunicaciones · 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TIPOS DE COMUNICACIÓN -->
+<section id="tipos">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:3rem">
+      <span class="section-tag">03b · Contenido Visto</span>
+      <h2 class="section-title">Funciones y Formas<br/>de Comunicación</h2>
+      <div class="section-line center"></div>
+    </div>
+    <div class="tipos-grid">
+      <div class="reveal"><div class="tipo-card">
+        <span class="tipo-icon">🎭</span>
+        <h3>Kinésica · Función Emotiva</h3>
+        <p>Los gestos, expresiones faciales y postura corporal transmiten emociones. La función emotiva expresa el estado interior del emisor y construye conexión real entre personas.</p>
+        <span class="tipo-owner"><i class="fa-solid fa-user"></i> Andrés Mauricio Meza</span>
+      </div></div>
+      <div class="reveal"><div class="tipo-card">
+        <span class="tipo-icon">🗣️</span>
+        <h3>Paralenguaje · Función Fática</h3>
+        <p>El tono, volumen, ritmo y pausas de la voz complementan el mensaje verbal. La función fática mantiene abierto el canal de comunicación entre interlocutores.</p>
+        <span class="tipo-owner"><i class="fa-solid fa-user"></i> Luz Karime Loaiza</span>
+      </div></div>
+      <div class="reveal"><div class="tipo-card">
+        <span class="tipo-icon">📍</span>
+        <h3>Proxémica · Función Apelativa</h3>
+        <p>El uso del espacio físico entre personas comunica intenciones y relaciones. La función apelativa busca influir en la conducta del receptor de manera consciente.</p>
+        <span class="tipo-owner"><i class="fa-solid fa-user"></i> Bryan Franco Gómez</span>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EVIDENCIAS -->
+<section id="evidencias">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:1.5rem">
+      <span class="section-tag">04 · Evidencias</span>
+      <h2 class="section-title">Trabajos y Actividades</h2>
+      <div class="section-line center"></div>
+    </div>
+
+    <div class="reveal d1 admin-note">
+      <i class="fa-solid fa-circle-info"></i>
+      <div>
+        <strong>¿Cómo agregar tus evidencias?</strong> Sube cada archivo (Word, PowerPoint) a
+        <strong>Google Drive</strong>, <strong>OneDrive</strong> o cualquier servicio de nube.
+        Copia el enlace compartido y pégalo en el campo de cada tarjeta. El botón
+        <em>"Abrir evidencia"</em> aparecerá automáticamente y llevará directo al archivo.
+        El enlace queda guardado en tu navegador para esta página.
+      </div>
+    </div>
+
+    <!-- ── ANDRÉS ── -->
+    <div id="ev-am" class="ev-member-block reveal">
+      <div class="ev-member-header">
+        <div class="ev-member-avatar" style="background:linear-gradient(135deg,#7c3aed,#c084fc)">AM</div>
+        <div class="ev-member-info">
+          <h3>Andrés Mauricio Meza</h3>
+          <p>Aprendiz ADSO · SENA</p>
+          <span class="ev-member-topic">🎭 Kinésica · Función Emotiva</span>
+        </div>
+      </div>
+      <div class="ev-grid">
+
+        <div class="ev-card reveal">
+          <div class="ev-thumb"><i class="fa-solid fa-file-word"></i></div>
+          <div class="ev-body">
+            <h4>Cuento — La Sapa Caramelada</h4>
+            <p>Cuento creativo que explora la comunicación no verbal y las emociones a través de la narrativa.</p>
+            <span class="ev-chip">Word · Cuento</span>
+            <div class="ev-link-slot" data-key="am-cuento">
+              <i class="fa-solid fa-link"></i>
+              <input type="text" value="https://docs.google.com/document/d/1Iy-hrM6o_1pAtYVp6aOWmR540W_uleft/edit" oninput="handleLink(this,'am-cuento')"/>
+            </div>
+            <a class="ev-link-btn" id="btn-am-cuento" href="#" target="_blank" rel="noopener">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir evidencia
+            </a>
+          </div>
+        </div>
+
+        <div class="ev-card reveal d1">
+          <div class="ev-thumb"><i class="fa-solid fa-file-word"></i></div>
+          <div class="ev-body">
+            <h4>Taller Tipos de Comunicación</h4>
+            <p>Análisis sobre las diferencias entre comunicación verbal, no verbal, kinésica y escrita.</p>
+            <span class="ev-chip">Word · Taller</span>
+            <div class="ev-link-slot" data-key="am-taller">
+              <i class="fa-solid fa-link"></i>
+              <input type="text" value="https://docs.google.com/document/d/1v_FCloQ-sMZG5WX0bFMDoNWS4Bdmk9lp/edit" oninput="handleLink(this,'am-taller')"/>
+            </div>
+            <a class="ev-link-btn" id="btn-am-taller" href="#" target="_blank" rel="noopener">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir evidencia
+            </a>
+          </div>
+        </div>
+
+        <div class="ev-card reveal d2">
+          <div class="ev-thumb"><i class="fa-solid fa-person-chalkboard"></i></div>
+          <div class="ev-body">
+            <h4>Presentación: Funciones del Lenguaje</h4>
+            <p>Presentación en PowerPoint sobre las funciones del lenguaje con énfasis en la función emotiva.</p>
+            <span class="ev-chip">PowerPoint · Presentación</span>
+            <div class="ev-link-slot" data-key="am-ppt">
+              <i class="fa-solid fa-link"></i>
+              <input type="text" value="https://docs.google.com/presentation/d/1gLAs32MBr_RDBUUKslmL4ZVfHt0IvQRg/edit?usp=drive_web&ouid=103464107436125703055&rtpof=true" oninput="handleLink(this,'am-ppt')"/>
+            </div>
+            <a class="ev-link-btn" id="btn-am-ppt" href="#" target="_blank" rel="noopener">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir evidencia
+            </a>
+          </div>
+        </div>
+
+        <div class="ev-card reveal d3">
+          <div class="ev-thumb"><i class="fa-solid fa-file-word"></i></div>
+          <div class="ev-body">
+            <h4>Investigación: Comunicación No Verbal</h4>
+            <p>Investigación sobre el lenguaje corporal, gestos y su impacto en la comunicación interpersonal.</p>
+            <span class="ev-chip">Word · Investigación</span>
+            <div class="ev-link-slot" data-key="am-inv">
+              <i class="fa-solid fa-link"></i>
+              <input type="text" value="https://docs.google.com/document/d/1FwAqJgU8mwOs-i7aMdNCijVvznODMNgt/edit#heading=h.4t1bcpmk68d" oninput="handleLink(this,'am-inv')"/>
+            </div>
+            <a class="ev-link-btn" id="btn-am-inv" href="#" target="_blank" rel="noopener">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir evidencia
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── LUZ KARIME ── -->
+    <div id="ev-lk" class="ev-member-block reveal" style="margin-top:3rem">
+      <div class="ev-member-header">
+        <div class="ev-member-avatar" style="background:linear-gradient(135deg,#5b21b6,#8b5cf6)">LK</div>
+        <div class="ev-member-info">
+          <h3>Luz Karime Loaiza</h3>
+          <p>Aprendiz ADSO · SENA</p>
+          <span class="ev-member-topic">🗣️ Paralenguaje · Función Fática</span>
+        </div>
+      </div>
+      <div class="ev-grid">
+
+        <div class="ev-card reveal">
+          <div class="ev-thumb"><i class="fa-solid fa-file-word"></i></div>
+          <div class="ev-body">
+            <h4>Cuento — La Sapa Caramelada</h4>
+            <p>Versión del cuento explorando el tono de voz y la función fática en el diálogo entre personajes.</p>
+            <span class="ev-chip">Word · Cuento</span>
+            <div class="ev-link-slot" data-key="lk-cuento">
+              <i class="fa-solid fa-link"></i>
+              <input type="text" value="https://docs.google.com/document/d/1qTcz7NlkI5pf0adPOPQ3_LUyzDFIrh-Z/edit" oninput="handleLink(this,'lk-cuento')"/>
+            </div>
+            <a class="ev-link-btn" id="btn-lk-cuento" href="#" target="_blank" rel="noopener">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir evidencia
+            </a>
+          </div>
+        </div>
+
+        <div class="ev-card reveal d1">
+          <div class="ev-thumb"><i class="fa-solid fa-file-word"></i></div>
+          <div class="ev-body">
+            <h4>Taller Tipos de Comunicación</h4>
+            <p>Estudio sobre el paralenguaje: entonación, pausas, ritmo y su rol en la comunicación efectiva.</p>
+            <span class="ev-chip">Word · Taller</span>
+            <div class="ev-link-slot" data-key="lk-taller">
+              <i class="fa-solid fa-link"></i>
+              <input type="text" value="https://docs.google.com/document/d/1CkqyHNxM7rA2_gALqMu5sE1EJY2euohr/edit?usp=drive_web&ouid=103464107436125703055&rtpof=true" oninput="handleLink(this,'lk-taller')"/>
+            </div>
+            <a class="ev-link-btn" id="btn-lk-taller" href="#" target="_blank" rel="noopener">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir evidencia
+            </a>
+          </div>
+        </div>
+
+        <div class="ev-card reveal d2">
+          <div class="ev-thumb"><i class="fa-solid fa-person-chalkboard"></i></div>
+          <div class="ev-body">
+            <h4>Presentación: Funciones del Lenguaje</h4>
+            <p>Presentación en PowerPoint sobre las funciones del lenguaje con énfasis en la función fática.</p>
+            <span class="ev-chip">PowerPoint · Presentación</span>
+            <div class="ev-link-slot" data-key="lk-ppt">
+              <i class="fa-solid fa-link"></i>
+              <input type="text" value="https://docs.google.com/presentation/d/1uXjAIJQ0I9iF7IMKJ0T76ctqt6-JEoVG/edit?usp=drive_web&ouid=103464107436125703055&rtpof=true" oninput="handleLink(this,'lk-ppt')"/>
+            </div>
+            <a class="ev-link-btn" id="btn-lk-ppt" href="#" target="_blank" rel="noopener">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir evidencia
+            </a>
+          </div>
+        </div>
+
+        <div class="ev-card reveal d3">
+          <div class="ev-thumb"><i class="fa-solid fa-file-word"></i></div>
+          <div class="ev-body">
+            <h4>Investigación: Comunicación No Verbal</h4>
+            <p>Investigación sobre cómo el paralenguaje complementa el mensaje verbal en distintos contextos.</p>
+            <span class="ev-chip">Word · Investigación</span>
+            <div class="ev-link-slot" data-key="lk-inv">
+              <i class="fa-solid fa-link"></i>
+              <input type="text" value="https://docs.google.com/document/d/1XsSN1yHdIWM88Icij8cY1F8RziESijtx/edit" oninput="handleLink(this,'lk-inv')"/>
+            </div>
+            <a class="ev-link-btn" id="btn-lk-inv" href="#" target="_blank" rel="noopener">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir evidencia
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── BRYAN ── -->
+    <div id="ev-bf" class="ev-member-block reveal" style="margin-top:3rem">
+      <div class="ev-member-header">
+        <div class="ev-member-avatar" style="background:linear-gradient(135deg,#3b0764,#6d28d9)">BF</div>
+        <div class="ev-member-info">
+          <h3>Bryan Franco Gómez</h3>
+          <p>Aprendiz ADSO · SENA</p>
+          <span class="ev-member-topic">📍 Proxémica · Función Apelativa</span>
+        </div>
+      </div>
+      <div class="ev-grid">
+
+        <div class="ev-card reveal">
+          <div class="ev-thumb"><i class="fa-solid fa-file-word"></i></div>
+          <div class="ev-body">
+            <h4>Cuento — La Sapa Caramelada</h4>
+            <p>Cuento que aborda el uso del espacio y la distancia entre personajes como forma de comunicación.</p>
+            <span class="ev-chip">Word · Cuento</span>
+            <div class="ev-link-slot" data-key="bf-cuento">
+              <i class="fa-solid fa-link"></i>
+              <input type="text" value="https://docs.google.com/document/d/1ALOo_OXNcnQhkm-TywLjItX0qOQ9GTTs/edit" oninput="handleLink(this,'bf-cuento')"/>
+            </div>
+            <a class="ev-link-btn" id="btn-bf-cuento" href="#" target="_blank" rel="noopener">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir evidencia
+            </a>
+          </div>
+        </div>
+
+        <div class="ev-card reveal d1">
+          <div class="ev-thumb"><i class="fa-solid fa-file-word"></i></div>
+          <div class="ev-body">
+            <h4>Taller Tipos de Comunicación</h4>
+            <p>Análisis sobre la proxémica y cómo el espacio personal influye en los mensajes que transmitimos.</p>
+            <span class="ev-chip">Word · Taller</span>
+            <div class="ev-link-slot" data-key="bf-taller">
+              <i class="fa-solid fa-link"></i>
+              <input type="text" value="https://docs.google.com/document/d/1RXVKIzSWyOD3BA0CDiQ-Zc-XgFNtJNkZ/edit" oninput="handleLink(this,'bf-taller')"/>
+            </div>
+            <a class="ev-link-btn" id="btn-bf-taller" href="#" target="_blank" rel="noopener">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir evidencia
+            </a>
+          </div>
+        </div>
+
+        <div class="ev-card reveal d2">
+          <div class="ev-thumb"><i class="fa-solid fa-person-chalkboard"></i></div>
+          <div class="ev-body">
+            <h4>Presentación: Funciones del Lenguaje</h4>
+            <p>Presentación en PowerPoint sobre las funciones del lenguaje con énfasis en la función apelativa.</p>
+            <span class="ev-chip">PowerPoint · Presentación</span>
+            <div class="ev-link-slot" data-key="bf-ppt">
+              <i class="fa-solid fa-link"></i>
+              <input type="text" value="https://docs.google.com/document/d/1yckw8KSmZGlwjufKR9hJCfQFz9qWVYYy/edit#heading=h.kqlha45dc5ym" oninput="handleLink(this,'bf-ppt')"/>
+            </div>
+            <a class="ev-link-btn" id="btn-bf-ppt" href="#" target="_blank" rel="noopener">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir evidencia
+            </a>
+          </div>
+        </div>
+
+        <div class="ev-card reveal d3">
+          <div class="ev-thumb"><i class="fa-solid fa-file-word"></i></div>
+          <div class="ev-body">
+            <h4>Investigación: Comunicación No Verbal</h4>
+            <p>Investigación sobre la proxémica, los espacios íntimo, personal, social y público en la comunicación.</p>
+            <span class="ev-chip">Word · Investigación</span>
+            <div class="ev-link-slot" data-key="bf-inv">
+              <i class="fa-solid fa-link"></i>
+              <input type="text" value="https://docs.google.com/document/d/1yckw8KSmZGlwjufKR9hJCfQFz9qWVYYy/edit#heading=h.kqlha45dc5ym" oninput="handleLink(this,'bf-inv')"/>
+            </div>
+            <a class="ev-link-btn" id="btn-bf-inv" href="#" target="_blank" rel="noopener">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir evidencia
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INTEGRANTES -->
+<section id="integrantes">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:3.5rem">
+      <span class="section-tag">05 · Equipo</span>
+      <h2 class="section-title">Integrantes del Grupo</h2>
+      <div class="section-line center"></div>
+    </div>
+    <div class="int-grid">
+
+      <div class="reveal"><div class="int-card">
+        <img class="int-avatar-img" src="https://drive.google.com/thumbnail?id=1DuTXXetJAyAE3gwu-4WoGxPY8P9kNegH&sz=w200" alt="Andrés Mauricio Meza"/>
+        <div class="int-name">Andrés Mauricio Meza</div>
+        <div class="int-role">Aprendiz ADSO</div>
+        <div class="int-topic">🎭 Kinésica · Función Emotiva</div>
+        <p class="int-desc">Descripción breve: Mostré interés por fortalecer mis habilidades comunicativas. Aporté responsabilidad, buena actitud y trabajo en equipo para alcanzar los objetivos de la competencia.</p>
+        <div class="int-skills">
+          <span class="skill-chip">Kinésica</span>
+          <span class="skill-chip">Creatividad</span>
+          <span class="skill-chip">Comunicación</span>
+        </div>
+        <div style="margin-top:1rem">
+          <a href="#ev-am" class="btn-hero" style="display:inline-flex;font-size:.78rem;padding:8px 18px;text-decoration:none">
+            <i class="fa-solid fa-folder-open"></i> Ver documentos
+          </a>
+        </div>
+      </div></div>
+      
+      <div class="reveal d1"><div class="int-card">
+        <img class="int-avatar-img" src="https://drive.google.com/thumbnail?id=1opz8VMiFujY8Z1xHcgS3fb_pOSN8v5Xk&sz=w200" alt="Luz Karime Loaiza"/>
+        <div class="int-name">Luz Karime Loaiza</div>
+        <div class="int-role">Aprendiz ADSO</div>
+        <div class="int-topic">🗣️ Paralenguaje · Función Fática</div>
+        <p class="int-desc">Descripción breve: Me interesó aprender nuevas formas de comunicación. Mis fortalezas fueron la escucha activa y la colaboración, contribuyendo a una mejor coordinación del equipo.</p>
+        <div class="int-skills">
+          <span class="skill-chip">Paralenguaje</span>
+          <span class="skill-chip">Empatía</span>
+          <span class="skill-chip">Liderazgo</span>
+        </div>
+        <div style="margin-top:1rem">
+          <a href="#ev-lk" class="btn-hero" style="display:inline-flex;font-size:.78rem;padding:8px 18px;text-decoration:none">
+            <i class="fa-solid fa-folder-open"></i> Ver documentos
+          </a>
+        </div>
+      </div></div>
+      
+      <div class="reveal d2"><div class="int-card">
+        <img class="int-avatar-img" src="https://drive.google.com/thumbnail?id=1Npi0wxSn-qVYU3PKwmygGPSjI7aPXU60&sz=w200" alt="Bryan Franco Gómez"/>
+        <div class="int-name">Bryan Franco Gómez</div>
+        <div class="int-role">Aprendiz ADSO</div>
+        <div class="int-topic">📍 Proxémica · Función Apelativa</div>
+        <p class="int-desc">Descripción breve: Participé con compromiso y disposición para aprender. Aporté empatía, comunicación clara y apoyo constante para fortalecer el trabajo del grupo.</p>
+        <div class="int-skills">
+          <span class="skill-chip">Proxémica</span>
+          <span class="skill-chip">Análisis</span>
+          <span class="skill-chip">Teamwork</span>
+        </div>
+        <div style="margin-top:1rem">
+          <a href="#ev-bf" class="btn-hero" style="display:inline-flex;font-size:.78rem;padding:8px 18px;text-decoration:none">
+            <i class="fa-solid fa-folder-open"></i> Ver documentos
+          </a>
+        </div>
+      </div></div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- REFLEXIONES FINALES -->
+<section id="reflexiones">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:3.5rem">
+      <span class="section-tag">06 · Reflexión Final</span>
+      <h2 class="section-title">Lo Aprendido por<br/>Cada Aprendiz</h2>
+      <div class="section-line center"></div>
+    </div>
+    <div class="ref-grid">
+
+      <div class="reveal"><div class="ref-card">
+        <div class="ref-bar"></div>
+        <div class="ref-header">
+          <div class="ref-avatar" style="background:linear-gradient(135deg,#7c3aed,#c084fc)">AM</div>
+          <div class="ref-who"><h4>Andrés Mauricio Meza</h4><p>Aprendiz ADSO · SENA</p></div>
+        </div>
+        <p class="ref-text">"Durante esta formación comprendí que la comunicación va mucho más allá de las palabras, ya que el cuerpo transmite mensajes de manera constante, incluso cuando permanecemos en silencio. Aprender sobre la kinésica me permitió reconocer que los gestos, las posturas, las expresiones faciales y los movimientos corporales reflejan emociones, actitudes e intenciones que muchas veces no se expresan verbalmente. Este conocimiento transformó mi forma de comunicarme, haciéndome más consciente de mi lenguaje no verbal y de la importancia de interpretar correctamente el de los demás. Gracias a este aprendizaje, hoy entiendo que una buena comunicación también depende de la coherencia entre lo que decimos y lo que expresamos con nuestro cuerpo. Estoy convencido de que estas habilidades fortalecerán la manera en que me relaciono con mi equipo de trabajo y con mis futuros clientes, permitiéndome generar mayor confianza, empatía y una comunicación más efectiva ."</p>
+      </div></div>
+
+      <div class="reveal d1"><div class="ref-card">
+        <div class="ref-bar"></div>
+        <div class="ref-header">
+          <div class="ref-avatar" style="background:linear-gradient(135deg,#5b21b6,#8b5cf6)">LK</div>
+          <div class="ref-who"><h4>Luz Karime Loaiza</h4><p>Aprendiz ADSO · SENA</p></div>
+        </div>
+        <p class="ref-text">"Durante este proceso de aprendizaje comprendí que la comunicación no depende únicamente de las palabras que utilizamos, sino también de la manera en que las expresamos. Aprendí que el tono de voz, el ritmo al hablar, el volumen, las pausas e incluso los silencios transmiten emociones, intenciones y estados de ánimo que pueden fortalecer o debilitar un mensaje. El estudio del paralenguaje y de la función fática me permitió entender la importancia de mantener una comunicación abierta, clara y cercana, favoreciendo el interés y la participación de los demás. Además, comprendí que la forma en que iniciamos, mantenemos y cerramos una conversación influye directamente en la calidad de nuestras relaciones. Estoy convencido de que aplicar estos conocimientos me permitirá comunicarme con mayor seguridad, generar confianza y fortalecer los vínculos personales y profesionales mediante un diálogo respetuoso, efectivo y orientado a la colaboración."</p>
+      </div></div>
+
+      <div class="reveal d2"><div class="ref-card">
+        <div class="ref-bar"></div>
+        <div class="ref-header">
+          <div class="ref-avatar" style="background:linear-gradient(135deg,#3b0764,#6d28d9)">BF</div>
+          <div class="ref-who"><h4>Bryan Franco Gómez</h4><p>Aprendiz ADSO · SENA</p></div>
+        </div>
+        <p class="ref-text">"Durante esta formación comprendí que la comunicación también se construye a partir del espacio que compartimos con los demás y de la manera en que interactuamos en cada contexto. Aprender sobre la proxémica me permitió entender que la distancia física, la ubicación y la forma en que nos posicionamos frente a otras personas influyen significativamente en la percepción, la confianza y la calidad de las relaciones interpersonales. Asimismo, el estudio de la función apelativa me enseñó la importancia de transmitir mensajes con claridad y propósito para orientar, motivar e influir positivamente en quienes nos rodean. Además, comprendí que adaptar mi comportamiento según la situación favorece una interacción más efectiva y respetuosa. Estoy convencido de que estas habilidades fortalecerán mi capacidad de liderazgo y me permitirán construir relaciones profesionales basadas en la confianza, la empatía, el respeto y el trabajo colaborativo."</p>
+      </div></div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Comunicación Asertiva · ADSO</div>
+        <p>Proyecto desarrollado como evidencia de la competencia de Comunicaciones del programa de Tecnología en Análisis y Desarrollo de Software.</p>
+        <span class="sena-badge">⬡ SENA · Ficha 3256502 · Colombia · 2026</span>
+      </div>
+      <div class="footer-col">
+        <h5>Secciones</h5>
+        <ul>
+          <li><a href="#intro">Introducción</a></li>
+          <li><a href="#temas">Temas vistos</a></li>
+          <li><a href="#reflexion">Reflexión del reto</a></li>
+          <li><a href="#tipos">Tipos de Comunicación</a></li>
+          <li><a href="#evidencias">Evidencias</a></li>
+          <li><a href="#integrantes">Integrantes</a></li>
+          <li><a href="#reflexiones">Reflexión final</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Programa</h5>
+        <ul>
+          <li><a href="#">ADSO · SENA</a></li>
+          <li><a href="#">Ficha 3256502</a></li>
+          <li><a href="#">Competencia Comunicaciones</a></li>
+          <li><a href="#">Instructora: Kenia Nayiber Lopez</a></li>
+          <li><a href="#">Año 2026</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 <strong>ADSO · SENA · Ficha 3256502</strong> · Tecnología en Análisis y Desarrollo de Software</div>
+      <div class="social-row">
+        <a href="#" class="soc-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="#" class="soc-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" class="soc-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="soc-btn" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Scroll reveal ──────────────────────────────────────
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+revealEls.forEach(el => revealObs.observe(el));
+
+// ── Nav scroll + active section ───────────────────────
+const nav = document.getElementById('topnav');
+const navLinks = document.querySelectorAll('.nav-links a');
+const sections = ['hero','intro','temas','reflexion','tipos','evidencias','integrantes','reflexiones'];
+
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 30);
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= 130 && rect.bottom > 130) current = id;
+    }
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}, { passive: true });
+
+// ── Evidence links (persisted in localStorage) ────────
+const KEYS = [
+  'am-cuento','am-taller','am-ppt','am-inv',
+  'lk-cuento','lk-taller','lk-ppt','lk-inv',
+  'bf-cuento','bf-taller','bf-ppt','bf-inv'
+];
+
+function setLink(key, url) {
+  const btn = document.getElementById('btn-' + key);
+  if (!btn) return;
+  const trimmed = url.trim();
+  if (trimmed) {
+    btn.href = trimmed;
+    btn.classList.add('visible');
+  } else {
+    btn.href = '#';
+    btn.classList.remove('visible');
+  }
+}
+
+function handleLink(input, key) {
+  const url = input.value;
+  try { localStorage.setItem('ev_' + key, url); } catch(e){}
+  setLink(key, url);
+}
+
+// Restore saved links on load (prioritize localStorage, fallback to HTML value)
+window.addEventListener('DOMContentLoaded', () => {
+  KEYS.forEach(key => {
+    try {
+      const saved = localStorage.getItem('ev_' + key);
+      const slot = document.querySelector('[data-key="' + key + '"] input');
+      if (saved && slot) {
+        slot.value = saved;
+        setLink(key, saved);
+      } else if (slot && slot.value.trim()) {
+        setLink(key, slot.value);
+      }
+    } catch(e){}
+  });
+});
+</script>
+</body>
+</html>
